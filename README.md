@@ -14,6 +14,30 @@ Swagger/OpenAPI: `http://localhost:8080/swagger-ui.html`
 
 React frontend: `http://localhost:5173`
 
+## Render Deployment
+
+Create/provide a reachable MySQL database before deploying the API. Render's container cannot connect to the local Docker MySQL service name (`mysql`) or to `localhost`, so set these environment variables on the Render web service:
+
+```bash
+DB_URL=jdbc:mysql://<mysql-host>:3306/task_tracker?useSSL=true&allowPublicKeyRetrieval=true
+DB_USERNAME=<mysql-user>
+DB_PASSWORD=<mysql-password>
+JWT_SECRET=<long-production-secret>
+```
+
+Render provides `PORT` automatically; the API reads it at startup. If you are not attaching Redis on Render, disable Redis-backed caching with:
+
+```bash
+CACHE_TYPE=simple
+```
+
+If you do attach Redis, keep `CACHE_TYPE=redis` and set:
+
+```bash
+REDIS_HOST=<redis-host>
+REDIS_PORT=6379
+```
+
 ## Auth Flow
 
 1. `POST /api/auth/register` creates an organization and its first `ADMIN`.
