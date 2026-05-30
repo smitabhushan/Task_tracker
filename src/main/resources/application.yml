@@ -1,0 +1,38 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  application:
+    name: team-task-tracker-api
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/task_tracker?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true}
+    username: ${DB_USERNAME:task_user}
+    password: ${DB_PASSWORD:task_password}
+  jpa:
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+  flyway:
+    enabled: true
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+  cache:
+    type: redis
+    redis:
+      time-to-live: 5m
+
+security:
+  jwt:
+    issuer: team-task-tracker
+    secret: ${JWT_SECRET:change-me-change-me-change-me-change-me-change-me}
+    access-token-minutes: ${JWT_ACCESS_MINUTES:15}
+    refresh-token-days: ${JWT_REFRESH_DAYS:7}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
