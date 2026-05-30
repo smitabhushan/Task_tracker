@@ -25,6 +25,12 @@ DB_PASSWORD=<mysql-password>
 JWT_SECRET=<long-production-secret>
 ```
 
+You can also set a single provider URL instead of the three database variables above:
+
+```bash
+DATABASE_URL=mysql://<mysql-user>:<mysql-password>@<mysql-host>:3306/task_tracker
+```
+
 Render provides `PORT` automatically; the API reads it at startup. If you are not attaching Redis on Render, disable Redis-backed caching with:
 
 ```bash
