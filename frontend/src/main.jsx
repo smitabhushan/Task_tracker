@@ -15,7 +15,10 @@ import {
 } from 'lucide-react';
 import './styles.css';
 
-const API_URL = import.meta.env.VITE_API_URL;
+const configuredApiUrl = import.meta.env.VITE_API_URL;
+const API_URL = configuredApiUrl && configuredApiUrl !== 'undefined'
+  ? configuredApiUrl.replace(/\/$/, '')
+  : '';
 const STATUSES = ['TODO', 'IN_PROGRESS', 'IN_REVIEW', 'BLOCKED', 'DONE'];
 const PRIORITIES = ['LOW', 'MEDIUM', 'HIGH'];
 const ROLES = ['ADMIN', 'MANAGER', 'MEMBER'];
