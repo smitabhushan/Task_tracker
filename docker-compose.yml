@@ -46,15 +46,14 @@ services:
   frontend:
     build:
       context: ./frontend
-    depends_on:
-      - api
     environment:
-      VITE_API_URL: http://localhost:8080
+      VITE_API_URL: https://task-tracker-ib0d.onrender.com
     ports:
       - "5173:5173"
     volumes:
       - ./frontend:/app
       - /app/node_modules
+
 
 volumes:
   mysql_data:
