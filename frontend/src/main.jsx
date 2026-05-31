@@ -502,7 +502,8 @@ function useApi(token) {
 }
 
 async function request(path, { method = 'GET', body, token } = {}) {
-  const response = await fetch(`${API_URL}${path}`, {
+  const url = `${API_URL}${path}`;
+  const response = await fetch(url, {
     method,
     headers: {
       ...(body ? { 'Content-Type': 'application/json' } : {}),
@@ -515,6 +516,10 @@ async function request(path, { method = 'GET', body, token } = {}) {
     throw new Error(error?.message || `Request failed with ${response.status}`);
   }
   if (response.status === 204) return null;
+  const contentType = response.headers.get('content-type') || '';
+  if (!contentType.includes('application/json')) {
+    throw new Error(`Expected JSON from ${url}, received ${contentType || 'unknown content type'}`);
+  }
   return response.json();
 }
 
