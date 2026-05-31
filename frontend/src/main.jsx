@@ -18,7 +18,7 @@ import './styles.css';
 const configuredApiUrl = import.meta.env.VITE_API_URL;
 const API_URL = configuredApiUrl && configuredApiUrl !== 'undefined'
   ? configuredApiUrl.replace(/\/$/, '')
-  : '';
+  : 'https://task-tracker-ib0d.onrender.com';
 const STATUSES = ['TODO', 'IN_PROGRESS', 'IN_REVIEW', 'BLOCKED', 'DONE'];
 const PRIORITIES = ['LOW', 'MEDIUM', 'HIGH'];
 const ROLES = ['ADMIN', 'MANAGER', 'MEMBER'];
